@@ -165,7 +165,6 @@ GET http://localhost:5000/logcat/emulator-5554?level=error&tag=MyApp
 4. The processed logs are returned as a JSON response.
 
 ## 📌 Future Enhancements
-- **Web UI** for easier log viewing
 - **Log Streaming** to get live updates
 - **Persistent Log Storage**
 
