@@ -7,15 +7,6 @@ A web-based tool to automate and simplify retrieving logcat logs from an Android
 - **Filtering**: Filter logs by priority, tag, process ID (PID), keywords, or time range.
 - **Web API**: RESTful endpoints for fetching logs.
 - **Easy ADB Integration**: Uses ADBKit to interact with the Android Debug Bridge (ADB).
-# Automated Log Retrieval Tool
-
-A web-based tool to automate and simplify retrieving logcat logs from an Android device using Node.js, Express, React, and ADBKit.
-
-## 🚀 Features
-- **Retrieve Logcat Logs**: Fetch real-time logcat logs from an Android device.
-- **Filtering**: Filter logs by priority, tag, process ID (PID), keywords, or time range.
-- **Web API**: RESTful endpoints for fetching logs.
-- **Easy ADB Integration**: Uses ADBKit to interact with the Android Debug Bridge (ADB).
 - **Web UI**: A React-based frontend for easier log viewing and filtering.
 
 ## 🛠️ Technologies Used
@@ -83,9 +74,9 @@ GET http://localhost:5000/logcat/emulator-5554?level=error&tag=MyApp
 ```
 
 ## 🎨 Web UI Features
-- **Connect to a device** – Connect to a device via UI.
-- **Advanced Filtering** – Easily apply filters using UI controls.
-- **Copy & Export Logs** – Download logs in `.txt` or `.json` format.
+- **Connect to a device** – Connect to a device via UI. (In works)
+- **Advanced Filtering** – Easily apply filters using UI controls. (In works)
+- **Copy & Export Logs** – Download logs in `.txt` or `.json` format. (In works)
 
 ## 🛠️ How It Works
 1. The Express server initializes an ADB client (`adb.createClient()`).
