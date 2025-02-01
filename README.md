@@ -1,6 +1,6 @@
 # Automated Log Retreival Tool
 
-A web-based tool to automate and simplify retrieving logcat logs from an Android device using Node.js, Express, and ADBKit.
+A web-based tool to automate and simplify retrieving logcat logs from an Android device using Node.js, Express, React and ADBKit.
 
 ## 🚀 Features
 - **Retrieve Logcat Logs**: Fetch real-time logcat logs from an Android device.
