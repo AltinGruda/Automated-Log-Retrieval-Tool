@@ -1,4 +1,4 @@
-# Automated Log Retreival Tool
+# Automated Log Retrieval Tool
 
 A web-based tool to automate and simplify retrieving logcat logs from an Android device using Node.js, Express, React and ADBKit.
 
