@@ -17,7 +17,7 @@ import { getAllLogs } from "../api/device";
 import { Spinner } from "./ui/spinner";
 import { useDevice } from "../state/DeviceContext";
 
-export default function LogTable() {
+export default function LogTable({ newLogs }) {
   const [logs, setLogs] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const device = useDevice();
@@ -25,13 +25,25 @@ export default function LogTable() {
     async function getLogs() {
       setIsLoading(true);
       if (device.deviceIp) {
-        const response = await getAllLogs();
+        const response = await getAllLogs(device.deviceIp);
         setLogs(response);
       }
       setIsLoading(false);
     }
     getLogs();
   }, [device]);
+
+  useEffect(() => {
+    if (newLogs.length > 0) {
+      setIsLoading(true);
+      setLogs([]);
+
+      setTimeout(() => {
+        setLogs(newLogs);
+        setIsLoading(false);
+      }, 300);
+    }
+  }, [newLogs]);
 
   return (
     <div className="sm:p-4">
@@ -59,31 +71,37 @@ export default function LogTable() {
                 </TableCell>
               </TableRow>
             )}
-            {logs
-              ? logs.map((log, index) => (
-                  <Collapsible key={index} asChild>
-                    <>
-                      <CollapsibleTrigger asChild>
-                        <TableRow>
-                          <TableCell>{log.pid}</TableCell>
-                          <TableCell>{log.tid}</TableCell>
-                          <TableCell>{log.tag}</TableCell>
-                          <TableCell className="break-words overflow-hidden text-ellipsis whitespace-normal w-[400px]">
-                            {log.message.length > 50
-                              ? log.message.slice(0, 100) + "..."
-                              : log.message}
-                          </TableCell>
-                          <TableCell>{log.priority}</TableCell>
-                          <TableCell>{log.timestamp}</TableCell>
-                        </TableRow>
-                      </CollapsibleTrigger>
-                      <CollapsibleContent asChild>
-                        <CollapsibleRow log={log} />
-                      </CollapsibleContent>
-                    </>
-                  </Collapsible>
-                ))
-              : null}
+            {logs ? (
+              logs.map((log, index) => (
+                <Collapsible key={index} asChild>
+                  <>
+                    <CollapsibleTrigger asChild>
+                      <TableRow>
+                        <TableCell>{log.pid}</TableCell>
+                        <TableCell>{log.tid}</TableCell>
+                        <TableCell>{log.tag}</TableCell>
+                        <TableCell className="break-words overflow-hidden text-ellipsis whitespace-normal w-[400px]">
+                          {log.message.length > 50
+                            ? log.message.slice(0, 100) + "..."
+                            : log.message}
+                        </TableCell>
+                        <TableCell>{log.priority}</TableCell>
+                        <TableCell>{log.timestamp}</TableCell>
+                      </TableRow>
+                    </CollapsibleTrigger>
+                    <CollapsibleContent asChild>
+                      <CollapsibleRow log={log} />
+                    </CollapsibleContent>
+                  </>
+                </Collapsible>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={6} className="text-center py-4">
+                  No logs found
+                </TableCell>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
 
