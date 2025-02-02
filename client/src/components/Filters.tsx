@@ -4,6 +4,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { X } from "lucide-react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { Input } from "./ui/input";
 
 export default function Filters() {
   const availableFilters = ["Priority", "Tag", "PID", "Time Range"];
@@ -18,32 +19,30 @@ export default function Filters() {
   };
 
   return (
-    <div className="flex flex-wrap gap-2 p-4">
-      {/* Active Filters Display */}
+    <div className="flex flex-wrap gap-2 p-4 rounded-lg shadow-sm">
       {activeFilter && (
-        <div className="flex items-center gap-2 bg-gray-200 px-3 py-1 rounded-full">
-          <span className="text-sm">
+        <div className="flex items-center gap-2 bg-gray-200 dark:bg-gray-700 px-3 py-1 rounded-full">
+          <span className="text-sm text-gray-800 dark:text-gray-200">
             {activeFilter}: {selectedValue || (date ? date.toISOString() : "")}
           </span>
           <button onClick={() => removeFilter()}>
-            <X className="w-4 h-4 text-gray-600 hover:text-black" />
+            <X className="w-4 h-4 text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white" />
           </button>
         </div>
       )}
 
-      {/* Add Filter Popover */}
       <Popover>
         <PopoverTrigger asChild>
           <Button variant="outline" className="px-3 py-1 text-sm">
             + Add Filter
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-48 p-2 bg-white shadow-md rounded-lg">
+        <PopoverContent className="w-48 p-2 bg-white dark:bg-gray-800 shadow-md rounded-lg">
           <div className="flex flex-col gap-2">
             {availableFilters.map((filter) => (
               <button
                 key={filter}
-                className="text-left p-2 hover:bg-gray-100 rounded-md"
+                className="text-left p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md text-gray-800 dark:text-gray-200"
                 onClick={() => setActiveFilter(filter)}
               >
                 {filter}
@@ -53,7 +52,6 @@ export default function Filters() {
         </PopoverContent>
       </Popover>
 
-      {/* Step 2: Popover for selecting filter values */}
       {activeFilter && (
         <Popover>
           <PopoverTrigger asChild>
@@ -61,13 +59,13 @@ export default function Filters() {
               Select {activeFilter} Value
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="w-64 p-4 bg-white shadow-md rounded-lg">
+          <PopoverContent className="w-64 p-4 bg-white dark:bg-gray-800 shadow-md rounded-lg">
             {activeFilter === "Priority" && (
               <div className="flex flex-col gap-2">
                 {["High", "Medium", "Low"].map((priority) => (
                   <button
                     key={priority}
-                    className="text-left p-2 hover:bg-gray-100 rounded-md"
+                    className="text-left p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md text-gray-800 dark:text-gray-200"
                     onClick={() => setSelectedValue(priority)}
                   >
                     {priority}
@@ -80,7 +78,7 @@ export default function Filters() {
                 {["Bug", "Feature", "Enhancement"].map((tag) => (
                   <button
                     key={tag}
-                    className="text-left p-2 hover:bg-gray-100 rounded-md"
+                    className="text-left p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md text-gray-800 dark:text-gray-200"
                     onClick={() => setSelectedValue(tag)}
                   >
                     {tag}
@@ -89,10 +87,10 @@ export default function Filters() {
               </div>
             )}
             {activeFilter === "PID" && (
-              <input
+              <Input
                 type="text"
                 placeholder="Enter PID"
-                className="w-full p-2 border rounded-md"
+                className="w-full"
                 onChange={(e) => setSelectedValue(e.target.value)}
               />
             )}
@@ -104,7 +102,7 @@ export default function Filters() {
                 timeFormat="HH:mm"
                 timeIntervals={15}
                 dateFormat="yyyy-MM-dd HH:mm"
-                className="w-full p-2 border rounded-md"
+                className="w-full p-2 border rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200"
                 placeholderText="Select Date & Time"
               />
             )}
