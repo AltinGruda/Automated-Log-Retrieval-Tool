@@ -1,6 +1,5 @@
 import Filters from "./Filters";
 import LinksTable from "./LinksTable";
-import { Checkbox } from "./ui/checkbox";
 import { Input } from "./ui/input";
 
 export default function LogTable() {

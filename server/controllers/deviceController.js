@@ -81,4 +81,26 @@ const getDeviceLogcat = async (req, res) => {
   }
 };
 
-module.exports = { getDevices, getDeviceStatus, getDeviceLogcat };
+const connectToDevice = async (req, res) => {
+  try {
+    const { ip } = req.body;
+    if (!ip) {
+      return res.status(400).json({ error: "Device ip is required" });
+    }
+
+    await client.connect(ip);
+
+    console.log(`Connected to emulator at ${ip}`);
+    res.json({ success: true, message: `Connected to device at ${ip}` });
+  } catch (error) {
+    console.error("Error fetching device status:", error.message);
+    res.status(500).json({ error: "Failed to retrieve device status" });
+  }
+};
+
+module.exports = {
+  getDevices,
+  getDeviceStatus,
+  getDeviceLogcat,
+  connectToDevice,
+};

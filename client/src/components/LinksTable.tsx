@@ -15,19 +15,23 @@ import LinksVisitors from "./LinksVisitors";
 import { useEffect, useState } from "react";
 import { getAllLogs } from "../api/device";
 import { Spinner } from "./ui/spinner";
+import { useDevice } from "../state/DeviceContext";
 
 export default function LinksTable() {
   const [logs, setLogs] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const device = useDevice();
   useEffect(() => {
     async function getLogs() {
       setIsLoading(true);
-      const response = await getAllLogs();
-      setLogs(response);
+      if (device.deviceIp) {
+        const response = await getAllLogs();
+        setLogs(response);
+      }
       setIsLoading(false);
     }
     getLogs();
-  }, []);
+  }, [device]);
 
   return (
     <div className="sm:p-4">
@@ -72,6 +76,9 @@ export default function LinksTable() {
               : null}
           </TableBody>
         </Table>
+        {!device.deviceIp && (
+          <p className="text-center">Connect to a device to see logs</p>
+        )}
       </div>
     </div>
   );

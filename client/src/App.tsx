@@ -1,12 +1,15 @@
 import "./App.css";
 import { Toaster } from "./components/ui/sonner";
+import { DeviceProvider } from "./state/DeviceContext";
 import LogViewer from "./views/LogViewer";
 
 function App() {
   return (
     <>
-      <LogViewer />
-      <Toaster richColors position="top-center" />
+      <DeviceProvider>
+        <LogViewer />
+        <Toaster richColors position="top-center" />
+      </DeviceProvider>
     </>
   );
 }

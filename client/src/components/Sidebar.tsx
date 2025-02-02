@@ -2,16 +2,18 @@ import { useEffect, useState } from "react";
 import { Command } from "./ui/command";
 import { Button } from "./ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
-import { BadgeCheck, Check, Info, Loader2, Search } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { BadgeCheck, Info, Loader2, Search } from "lucide-react";
+import { Card, CardContent } from "./ui/card";
 import { Input } from "./ui/input";
 import { toast } from "sonner";
+import { connectToAndroidDevice } from "../api/device";
+import { useDevice } from "../state/DeviceContext";
 
 export default function Sidebar() {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [device, setDevice] = useState<string | null>(null);
+  const { deviceIp, connectDevice } = useDevice();
 
   // Detect Ctrl + J to open popup
   useEffect(() => {
@@ -28,15 +30,18 @@ export default function Sidebar() {
 
   const handleConnect = () => {
     if (!input) return;
-
     setIsLoading(true);
 
-    setTimeout(() => {
-      setIsLoading(false);
-      setDevice(input); // Simulate connected device
-      setOpen(false);
-      toast.success("Sucessfully connected to device!");
-    }, 2000); // Simulate connection delay
+    const connectToDevice = async () => {
+      const response = await connectToAndroidDevice({ ip: input });
+      if (response.success) {
+        connectDevice(input);
+      }
+    };
+    connectToDevice();
+    setIsLoading(false);
+    setOpen(false);
+    toast.success("Sucessfully connected to device!");
   };
 
   return (
@@ -85,7 +90,7 @@ export default function Sidebar() {
       </Dialog>
 
       {/* Connected Device Display */}
-      {device && (
+      {deviceIp && (
         <Card className="mt-4 bg-gray-100 flex items-center">
           <CardContent className="grid gap-4 p-4">
             <div className=" flex items-center gap-x-2">
@@ -94,7 +99,7 @@ export default function Sidebar() {
                 <p className="text-sm font-medium leading-none">
                   Connected device:
                 </p>
-                <p className="text-sm text-muted-foreground">{device}</p>
+                <p className="text-sm text-muted-foreground">{deviceIp}</p>
               </div>
             </div>
           </CardContent>
