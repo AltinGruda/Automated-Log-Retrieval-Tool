@@ -1,11 +1,10 @@
 import "./App.css";
-import { Button } from "./components/ui/button";
+import LogViewer from "./views/LogViewer";
 
 function App() {
   return (
     <>
-      <p className="text-red-900">Altin</p>
-      <Button>Click here</Button>
+      <LogViewer />
     </>
   );
 }
