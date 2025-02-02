@@ -1,10 +1,10 @@
 import { TableCell, TableRow } from "./ui/table";
 
-export default function LinksVisitors({ log }: { log: any }) {
+export default function CollapsibleRow({ log }: { log: any }) {
   return (
     <>
       <TableRow key={log.pid} className="bg-[#eff8fe]">
-        <TableCell colSpan={3}>{log.message}</TableCell>
+        <TableCell colSpan={6}>{log.message}</TableCell>
       </TableRow>
     </>
   );

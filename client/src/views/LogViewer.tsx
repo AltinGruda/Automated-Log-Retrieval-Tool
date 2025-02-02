@@ -1,4 +1,4 @@
-import LogTable from "../components/LogTable";
+import LogTableWrapper from "../components/LogTableWrapper";
 import Sidebar from "../components/Sidebar";
 
 export default function LogViewer() {
@@ -8,7 +8,7 @@ export default function LogViewer() {
         <Sidebar />
       </div>
       <div className="col-span-4 p-5">
-        <LogTable />
+        <LogTableWrapper />
       </div>
     </div>
   );
