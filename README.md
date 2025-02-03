@@ -2,6 +2,9 @@
 
 A web-based tool to automate and simplify retrieving logcat logs from an Android device using Node.js, Express, React and ADBKit.
 
+![image](https://github.com/user-attachments/assets/0ff81c54-a279-438a-b3c7-d96705e002ea)
+
+
 ## 🚀 Features
 - **Retrieve Logcat Logs**: Fetch real-time logcat logs from an Android device.
 - **Filtering**: Filter logs by priority, tag, process ID (PID), keywords, or time range.
