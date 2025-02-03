@@ -1,8 +1,9 @@
 import LogTableWrapper from "../components/LogTableWrapper";
 import Sidebar from "../components/Sidebar";
-import { MoonIcon, SunIcon } from "lucide-react";
+import { MoonIcon, RefreshCcw, SunIcon } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { useTheme } from "../components/theme-provider";
+import { useDevice } from "../state/DeviceContext";
 
 export default function LogViewer() {
   const { theme, setTheme } = useTheme();

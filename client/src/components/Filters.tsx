@@ -19,7 +19,7 @@ export default function Filters() {
   };
 
   return (
-    <div className="flex flex-wrap gap-2 p-4 rounded-lg shadow-sm">
+    <div className="flex flex-wrap gap-2 p-4 rounded-lg shadow-sm ml-5">
       {activeFilter && (
         <div className="flex items-center gap-2 bg-gray-200 dark:bg-gray-700 px-3 py-1 rounded-full">
           <span className="text-sm text-gray-800 dark:text-gray-200">
