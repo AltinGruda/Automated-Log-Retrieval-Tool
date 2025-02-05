@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import { Command } from "./ui/command";
 import { Button } from "./ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
-import { BadgeCheck, Info, Loader2, Search, Wifi } from "lucide-react";
+import { BadgeCheck, Heart, Info, Loader2, Search, Wifi } from "lucide-react";
 import { Card, CardContent } from "./ui/card";
 import { Input } from "./ui/input";
 import { toast } from "sonner";
 import { connectToAndroidDevice } from "../api/device";
 import { useDevice } from "../state/DeviceContext";
+import Signature from "./Signature";
 
 export default function Sidebar() {
   const [open, setOpen] = useState(false);
@@ -108,6 +109,12 @@ export default function Sidebar() {
           </CardContent>
         </Card>
       )}
+      <div className="signature">
+        <span className="text-white flex absolute bottom-[130px] left-[55px]">
+          Built with <Heart /> by
+        </span>
+        <Signature />
+      </div>
     </div>
   );
 }
